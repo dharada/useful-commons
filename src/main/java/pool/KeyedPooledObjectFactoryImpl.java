@@ -4,32 +4,32 @@ import org.apache.commons.pool2.KeyedPooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 
 /**
- * Created by dharada on 2015/12/06.
+ *
  */
-public class KeyedPooledObjectFactoryImpl implements KeyedPooledObjectFactory {
+public class KeyedPooledObjectFactoryImpl implements KeyedPooledObjectFactory<String, Object> {
 
     @Override
-    public PooledObject makeObject(Object key) throws Exception {
+    public PooledObject<java.lang.Object> makeObject(java.lang.String key) throws Exception {
         return null;
     }
 
     @Override
-    public void destroyObject(Object key, PooledObject p) throws Exception {
+    public void destroyObject(java.lang.String key, PooledObject<java.lang.Object> p) throws Exception {
 
     }
 
     @Override
-    public boolean validateObject(Object key, PooledObject p) {
+    public boolean validateObject(java.lang.String key, PooledObject<java.lang.Object> p) {
         return false;
     }
 
     @Override
-    public void activateObject(Object key, PooledObject p) throws Exception {
+    public void activateObject(java.lang.String key, PooledObject<java.lang.Object> p) throws Exception {
 
     }
 
     @Override
-    public void passivateObject(Object key, PooledObject p) throws Exception {
+    public void passivateObject(java.lang.String key, PooledObject<java.lang.Object> p) throws Exception {
 
     }
 }
