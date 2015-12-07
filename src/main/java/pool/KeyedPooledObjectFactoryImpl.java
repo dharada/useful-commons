@@ -31,5 +31,7 @@ public class KeyedPooledObjectFactoryImpl implements KeyedPooledObjectFactory<St
     @Override
     public void passivateObject(java.lang.String key, PooledObject<java.lang.Object> p) throws Exception {
 
+        System.out.println("");
+
     }
 }
