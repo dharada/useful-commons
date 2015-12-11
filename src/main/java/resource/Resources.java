@@ -103,8 +103,10 @@ public class Resources {
                     } catch (PrivilegedActionException e) {
                         throw (IOException) e.getException();
                     }
+
                     if (stream != null) {
                         try {
+
                             // Only this line is changed to make it to read
                             // properties files as UTF-8.
                             bundle = new PropertyResourceBundle(new InputStreamReader(stream, Definition.UTF_8));
