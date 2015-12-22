@@ -10,6 +10,9 @@ public class KeyedPooledObjectFactoryImpl implements KeyedPooledObjectFactory<St
 
     @Override
     public PooledObject<java.lang.Object> makeObject(java.lang.String key) throws Exception {
+
+        System.out.println("test");
+
         return null;
     }
 

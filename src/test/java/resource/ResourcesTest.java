@@ -16,4 +16,5 @@ public class ResourcesTest {
     public void testUtf8Bundle() throws Exception {
         assertThat(utf8Bundle("hoge").getString("key_hoge"), is("あいう"));
     }
+
 }
