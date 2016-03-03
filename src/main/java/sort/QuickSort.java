@@ -5,6 +5,9 @@ package sort;
  */
 public class QuickSort {
 
+    /*
+     * クイックソート（再帰用） 配列arrayの、a[sindex]からa[eindex]を並べ替えます。
+     */
     public void quickSort(int[] array, int sindex, int eindex) {
 
         if (sindex == eindex) {
@@ -51,6 +54,7 @@ public class QuickSort {
      * 大きい要素の開始番号を返します。
      */
     int partition(int[] a, int i, int j, int x) {
+
         int l = i, r = j;
 
         // 検索が交差するまで繰り返します
