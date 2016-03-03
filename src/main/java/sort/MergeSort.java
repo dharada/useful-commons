@@ -5,7 +5,7 @@ package sort;
  */
 public class MergeSort {
 
-    void mergeSort(int[] array) {
+    public int[] mergeSort(int[] array) {
 
         if (array.length > 1) {
 
@@ -31,20 +31,35 @@ public class MergeSort {
 
         }
 
+        return array;
+
     }
 
-    private void merge(int[] left, int[] right, int[] a) {
+    /**
+     * merge logic impl
+     * 
+     * @param leftArray
+     * @param rightArray
+     * @param array
+     */
+    private void merge(int[] leftArray, int[] rightArray, int[] array) {
 
-        int i = 0, j = 0;
+        int leftIndex = 0;
+        int rightIndex = 0;
 
-        while (i < left.length || j < right.length) {
+        while (leftIndex < leftArray.length || rightIndex < rightArray.length) {
 
-            if (j >= right.length || (i < left.length && left[i] < right[j])) {
-                a[i + j] = left[i];
-                i++;
+            if (rightIndex >= rightArray.length
+                    || (leftIndex < leftArray.length && leftArray[leftIndex] < rightArray[rightIndex])) {
+
+                array[leftIndex + rightIndex] = leftArray[leftIndex];
+                leftIndex++;
+
             } else {
-                a[i + j] = right[j];
-                j++;
+
+                array[leftIndex + rightIndex] = rightArray[rightIndex];
+                rightIndex++;
+
             }
         }
     }
