@@ -6,28 +6,30 @@ package sort;
 public class QuickSort {
 
     /*
-     * クイックソート（再帰用） 配列arrayの、a[sindex]からa[eindex]を並べ替えます。
+     * クイックソート（再帰用） 配列arrayの、leftからrightを並べ替えます。
      */
-    public void quickSort(int[] array, int sindex, int eindex) {
+    public void quickSort(int[] array, int left, int right) {
 
-        if (sindex == eindex) {
+        if (left == right) {
             return;
         }
 
-        int p = pivot(array, sindex, eindex);
+        int pivot = pivot(array, left, right);
 
-        if (p != -1) {
+        if (pivot != -1) {
 
-            int k = partition(array, sindex, eindex, array[p]);
+            int index = partition(array, left, right, array[pivot]);
 
-            quickSort(array, sindex, k - 1);
-            quickSort(array, k, eindex);
+            quickSort(array, left, index - 1);
+            quickSort(array, index, right);
+
         }
 
     }
 
     /*
-     * 軸要素の選択 順に見て、最初に見つかった異なる2つの要素のうち、 大きいほうの番号を返します。 全部同じ要素の場合は -1 を返します。
+     * 軸要素の選択 順に見て、最初に見つかった異なる2つの要素のうち、
+      * 大きいほうの番号を返します。 全部同じ要素の場合は -1 を返します。
      */
     int pivot(int[] a, int i, int j) {
 
@@ -50,33 +52,42 @@ public class QuickSort {
     }
 
     /*
-     * パーティション分割 a[i]～a[j]の間で、x を軸として分割します。 x より小さい要素は前に、大きい要素はうしろに来ます。
+     * パーティション分割 a[startIndex]～a[endIndex]の間で、x を軸として分割します。
+     * x より小さい要素は前に、大きい要素はうしろに来ます。
+     *
      * 大きい要素の開始番号を返します。
      */
-    int partition(int[] a, int i, int j, int x) {
+    int partition(int[] array, int startIndex, int endIndex, int x) {
 
-        int l = i, r = j;
+        int left = startIndex;
+        int right = endIndex;
 
         // 検索が交差するまで繰り返します
-        while (l <= r) {
+        while (left <= right) {
 
             // 軸要素以上のデータを探します
-            while (l <= j && a[l] < x)
-                l++;
+            while (left <= endIndex && array[left] < x) {
+                left++;
+            }
 
             // 軸要素未満のデータを探します
-            while (r >= i && a[r] >= x)
-                r--;
+            while (right >= startIndex && array[right] >= x) {
+                right--;
+            }
 
-            if (l > r)
+            if (left > right) {
                 break;
-            int t = a[l];
-            a[l] = a[r];
-            a[r] = t;
-            l++;
-            r--;
+            }
+
+            // 入れ替え
+            int temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+            left++;
+            right--;
         }
-        return l;
+
+        return left;
     }
 
 }
