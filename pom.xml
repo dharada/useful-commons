@@ -29,13 +29,36 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-            
+
+            <plugin>
+                <groupId>com.theoryinpractise</groupId>
+                <artifactId>clojure-maven-plugin</artifactId>
+                <version>1.7.1</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <sourceDirectories>
+                        <sourceDirectory>src/main/clojure</sourceDirectory>
+                    </sourceDirectories>
+                    <testSourceDirectories>
+                        <testSourceDirectory>src/test/clojure</testSourceDirectory>
+                    </testSourceDirectories>
+                </configuration>
+
+            </plugin>
+
         </plugins>
 
     </build>
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.clojure</groupId>
+            <artifactId>clojure</artifactId>
+            <version>1.8.0-RC4</version>
+        </dependency>
 
         <!--jsr-->
         <dependency>
