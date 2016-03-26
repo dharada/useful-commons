@@ -17,7 +17,6 @@ public class PartitionArray {
     public static int partition(int[] array, int left, int right) {
 
         int pivot = array[right];
-
         int index = left - 1;
 
         for (int j = left; j < right - 1; j++) {
@@ -39,6 +38,23 @@ public class PartitionArray {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+
+    public static void quickSort(int[] array, int left, int right) {
+
+        if (left < right) {
+
+            // partitionの位置は、決定
+            int partition = partition(array, left, right);
+
+            // 左半分 (partitionを除く）
+            quickSort(array, left, partition - 1);
+
+            // 右半分 (partitionを除く）
+            quickSort(array, partition + 1, right);
+
+        }
+
     }
 
 }
