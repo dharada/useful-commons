@@ -17,13 +17,14 @@ public class PartitionArray {
     public static int partition(int[] array, int left, int right) {
 
         int pivot = array[right];
+
         int index = left - 1;
 
-        for (int j = left; j < right - 1; j++) {
+        for (int jindex = left; jindex < right - 1; jindex++) {
 
-            if (array[j] <= pivot) {
+            if (array[jindex] <= pivot) {
                 index++;
-                swap(array, index, j);
+                swap(array, index, jindex);
             }
         }
 
