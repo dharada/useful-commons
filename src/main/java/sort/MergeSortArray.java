@@ -59,15 +59,14 @@ public class MergeSortArray {
         // merge
         merge(wks, lowerBound, mid + 1, upperBound);
 
-
     }
 
     private void merge(long[] wks, int lowPtr, int highPtr, int upperBound) {
 
         int jDex = 0;
-
         int lowerBound = lowPtr;
         int mid = highPtr - 1;
+
         int numberOfItems = upperBound - lowPtr + 1;
 
         while (lowPtr <= mid && highPtr <= upperBound) {
