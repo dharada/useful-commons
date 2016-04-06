@@ -22,6 +22,7 @@ public class PartitionArray {
 
         for (int jindex = left; jindex < right - 1; jindex++) {
 
+            // find smaller than pivot and move left
             if (array[jindex] <= pivot) {
                 index++;
                 swap(array, index, jindex);
