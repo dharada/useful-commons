@@ -19,7 +19,6 @@ public class ComponentManager {
     public void ComponentManager() {
     }
 
-
     private static Map<String, Component> dependencyMap = new LinkedHashMap<>();
 
     private static Map<String, Component> installMap = new LinkedHashMap<>();
@@ -34,6 +33,8 @@ public class ComponentManager {
 
                 case "DEPEND":
 
+                    System.out.println(line);
+
                     final Component cmp = new Component(words[1]);
 
                     if (words.length > 1) {
@@ -47,6 +48,8 @@ public class ComponentManager {
                     break;
 
                 case "INSTALL":
+
+                    System.out.println(line);
 
                     Component rootInstallCmp = new Component(words[1]);
                     rootInstallCmp.isRootInstall = true;
