@@ -27,11 +27,21 @@ public class MergeSort {
             mergeSort(right);
 
             // 最後にマージ
-            merge(left, right, array);
+
+            //merge(left, right, array);
+
+            mergeByMyOrigin(left, right, array);
 
         }
 
         return array;
+
+    }
+
+    private void mergeByMyOrigin(int[] leftArray, int[] rightArray, int[] array) {
+
+        new Merge().execute(leftArray, rightArray, array);
+
 
     }
 

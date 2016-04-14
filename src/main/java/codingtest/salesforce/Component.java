@@ -31,7 +31,7 @@ public class Component {
 
     }
 
-    // 参照左記cmpを管理する為のMap
+    // 参照先cmpを管理する為のMap
     private Map<String, Component> dependencies;
 
     // 参照元cmpを管理する為のMap
