@@ -68,9 +68,9 @@ public class QuickSort {
      * パーティション分割 a[startIndex]～a[endIndex]の間で、x を軸として分割します。
      * x より小さい要素は前に、大きい要素はうしろに来ます。
      *
-     * 大きい要素の開始番号を返します。
+     * 大きい要素の"開始番号"を返します。
      */
-    int partition(int[] array, int startIndex, int endIndex, int x) {
+    int partition(int[] array, int startIndex, int endIndex, int pivot) {
 
         int left = startIndex;
         int right = endIndex;
@@ -79,12 +79,12 @@ public class QuickSort {
         while (left <= right) {
 
             // 軸要素以上のデータを探します
-            while (left <= endIndex && array[left] < x) {
+            while (left <= endIndex && array[left] < pivot) {
                 left++;
             }
 
             // 軸要素未満のデータを探します
-            while (right >= startIndex && array[right] >= x) {
+            while (right >= startIndex && array[right] >= pivot) {
                 right--;
             }
 

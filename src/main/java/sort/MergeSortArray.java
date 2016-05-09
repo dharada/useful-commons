@@ -61,6 +61,13 @@ public class MergeSortArray {
 
     }
 
+    /**
+     * こっちのmerge logicは素人にもわかりやすいなあ・・
+     * @param wks
+     * @param lowPtr
+     * @param highPtr
+     * @param upperBound
+     */
     private void merge(long[] wks, int lowPtr, int highPtr, int upperBound) {
 
         int jDex = 0;
@@ -72,9 +79,12 @@ public class MergeSortArray {
         while (lowPtr <= mid && highPtr <= upperBound) {
 
             if (theArray[lowPtr] <= theArray[highPtr]) {
+
                 wks[jDex] = theArray[lowPtr];
                 lowPtr++;
+
             } else if (theArray[lowPtr] > theArray[highPtr]) {
+                
                 wks[jDex] = theArray[highPtr];
                 highPtr++;
             }
