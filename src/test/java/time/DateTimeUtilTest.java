@@ -39,11 +39,15 @@ public class DateTimeUtilTest {
         Locale locale = Locale.getDefault();
         String zoneId = DateTimeZone.getDefault().getID();
 
-        String pattern = "EEE MMM dd HH:mm:ss zzz YYYY";
+//        String pattern = "EEE MMM dd HH:mm:ss zzz YYYY";
+        String pattern = "EEE MMM dd HH:mm:ss 'JST' YYYY";
         String dateValue = "Sat Mar 17 17:02:43 JST 2018";
+//        String dateValue = "Sat Mar 17 17:02:43 'JST' 2018";
 
         DateTimeFormatter formatter = DateTimeFormat.forPattern(pattern).withDefaultYear(clock.read().getYear()).withLocale(locale).withZone(DateTimeZone.forID(zoneId));
+
         long millisecondsSinceEpoch = formatter.parseMillis(dateValue);
+
 
     }
 
@@ -51,8 +55,10 @@ public class DateTimeUtilTest {
     @Test
     public void testLogstash() {
 
-        String pattern = "EEE MMM dd HH:mm:ss zzz YYYY";
+        String pattern = "EEE MMM dd HH:mm:ss 'JST' YYYY";
+//        String pattern = "EEE MMM dd HH:mm:ss zzz YYYY";
         String dateValue = "Sat Mar 17 17:02:43 JST 2018";
+//        String dateValue = "Sat Mar 17 17:02:43 'JST' 2018";
 
         JodaParser jodaParser = new JodaParser(pattern, Locale.getDefault(), DateTimeZone.getDefault().getID());
         Instant parse = jodaParser.parse(dateValue);
