@@ -55,8 +55,8 @@ public class DateTimeUtilTest {
     @Test
     public void testLogstash() {
 
-        String pattern = "EEE MMM dd HH:mm:ss 'JST' YYYY";
-//        String pattern = "EEE MMM dd HH:mm:ss zzz YYYY";
+//        String pattern = "EEE MMM dd HH:mm:ss 'JST' YYYY";
+        String pattern = "EEE MMM dd HH:mm:ss zzz YYYY";
         String dateValue = "Sat Mar 17 17:02:43 JST 2018";
 //        String dateValue = "Sat Mar 17 17:02:43 'JST' 2018";
 
@@ -85,15 +85,8 @@ public class DateTimeUtilTest {
                 .appendYear(4, 4)
                 .toFormatter();
 
-
-        LocalDate date = LocalDate.now();
-//        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy");
-        String str = date.toString(formatter);
-        System.out.println(str);
-        // might output "6 October, 2013"
-
-        //System.out.println(formatter.toString());
-
+        // 金 10 19 01:34:19 JST 2018
+        System.out.println(DateTime.now().toString(formatter));
     }
 
 
