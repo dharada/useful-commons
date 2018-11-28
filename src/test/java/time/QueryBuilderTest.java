@@ -54,14 +54,5 @@ public class QueryBuilderTest {
         System.out.println(searchRequest.toString());
 
 
-        // fixme  need to investigate How to request..as REST
-        Request req = new Request("GET", "_search");
-        req.setJsonEntity(searchRequest.toString());
-
-        Response searchResponse = client.performRequest(req);
-        System.out.println(searchResponse.toString());
-
-        client.close();
-
     }
 }

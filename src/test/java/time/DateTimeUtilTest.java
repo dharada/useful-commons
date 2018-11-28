@@ -33,7 +33,7 @@ public class DateTimeUtilTest {
     }
 
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testDateTimeFormat() {
 
         Locale locale = Locale.getDefault();
@@ -52,7 +52,7 @@ public class DateTimeUtilTest {
     }
 
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testLogstash() {
 
 //        String pattern = "EEE MMM dd HH:mm:ss 'JST' YYYY";
