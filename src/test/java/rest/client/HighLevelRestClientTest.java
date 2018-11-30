@@ -5,7 +5,7 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.Test;
 
-public class HighLevelRestClisentTest {
+public class HighLevelRestClientTest {
 
 
     @Test
