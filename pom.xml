@@ -158,20 +158,20 @@
         </dependency>
 
 
-        <!--<dependency>-->
-            <!--<groupId>org.elasticsearch.client</groupId>-->
-            <!--<artifactId>elasticsearch-rest-high-level-client</artifactId>-->
-            <!--&lt;!&ndash;<version>5.6.13</version>&ndash;&gt;-->
-          <!--<version>6.2.4</version>-->
-        <!--</dependency>-->
-
-
         <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <!--<version>2.4.1</version>-->
-            <version>6.2.4</version>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <!--<version>5.6.13</version>-->
+          <version>6.2.4</version>
         </dependency>
+
+
+        <!--<dependency>-->
+            <!--<groupId>org.elasticsearch</groupId>-->
+            <!--<artifactId>elasticsearch</artifactId>-->
+            <!--&lt;!&ndash;<version>2.4.1</version>&ndash;&gt;-->
+            <!--<version>6.2.4</version>-->
+        <!--</dependency>-->
 
         <!--&lt;!&ndash; add the x-pack jar as a dependency &ndash;&gt;-->
         <!--<dependency>-->

@@ -34,7 +34,7 @@ public class HighLevelRestClientTest {
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(
                         new HttpHost("localhost", 9200, "http"),
-                        new HttpHost("localhost", 9201, "http")).build());
+                        new HttpHost("localhost", 9201, "http")));
 
 
     }
@@ -45,7 +45,7 @@ public class HighLevelRestClientTest {
 
         String user = "elastic";
         String password = "changeme";
-        String host = "elasticsearch.cinhtau.net";
+        String host = "elasticsearch.sample.net";
         int port = 9200;
         String trustStorePass = "fancyPassword";
 
@@ -79,8 +79,7 @@ public class HighLevelRestClientTest {
                     .setSocketTimeout(60000))
                     .setMaxRetryTimeoutMillis(60000);
 
-            restClient = builder.build();
-            restHighLevelClient = new RestHighLevelClient(restClient);
+            restHighLevelClient = new RestHighLevelClient(builder);
 
             // do sth
             aggregateData(restHighLevelClient);

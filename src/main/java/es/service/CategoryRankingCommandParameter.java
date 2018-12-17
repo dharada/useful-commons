@@ -1,10 +1,7 @@
 
 package es.service;
 
-//import com.mizuho_sc.mrw2.es.entity.CustomerEntity;
-//import com.mizuho_sc.mrw2.es.index.ReportsIndex;
-//import lombok.Getter;
-//import lombok.Setter;
+
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -13,31 +10,16 @@ import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.IncludeExclude;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
-//import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
-import org.elasticsearch.search.aggregations.metrics.tophits.TopHits;
 import org.elasticsearch.search.aggregations.pipeline.PipelineAggregatorBuilders;
-import org.elasticsearch.search.aggregations.pipeline.bucketscript.BucketScriptPipelineAggregationBuilder;
 import org.elasticsearch.search.aggregations.pipeline.bucketselector.BucketSelectorPipelineAggregationBuilder;
-//import org.elasticsearch.search.aggregations.pipeline.having.BucketSelectorBuilder;
-import org.elasticsearch.search.sort.SortBuilders;
-import org.elasticsearch.search.sort.SortOrder;
 
-import java.io.IOException;
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 
-//import static com.mizuho_sc.mrw2.es.Constants.CATEGORY_RANKING_TYPE_PERIOD;
+//import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
+//import org.elasticsearch.search.aggregations.pipeline.having.BucketSelectorBuilder;
 
-/**
- * CategoryRankingCommandParameter class.
- *
- * @author Keisuke Tanaka
- */
 
-//@Setter
-//@Getter
-//public class CategoryRankingCommandParameter extends RankingCommandParameter {
-    public class CategoryRankingCommandParameter  {
+public class CategoryRankingCommandParameter {
 
     /**
      * regionId
@@ -124,6 +106,7 @@ import java.util.HashMap;
 //    }
 
     /**
+     *
      */
     public String[] getIncludeSources() {
         return new String[]{"*"};
@@ -137,6 +120,7 @@ import java.util.HashMap;
 //    }
 
     /**
+     *
      */
     public BoolQueryBuilder getLogQuery() throws ElasticsearchException {
         return QueryBuilders.boolQuery();
@@ -178,6 +162,7 @@ import java.util.HashMap;
 //    }
 
     /**
+     *
      */
     protected BoolQueryBuilder getCustomerFilter() {
         return QueryBuilders.boolQuery();
@@ -278,8 +263,8 @@ import java.util.HashMap;
         TermsAggregationBuilder grouping = AggregationBuilders.terms("grouping");
 
         int sizeParam = 2;
-        return grouping.field("category.id" + getOutputSuffix()).size(sizeParam).includeExclude(new IncludeExclude(null,new String[]{"1", "2"}))
-;
+        return grouping.field("category.id" + getOutputSuffix()).size(sizeParam).includeExclude(new IncludeExclude(null, new String[]{"1", "2"}))
+                ;
     }
 
 //    /**
@@ -304,19 +289,18 @@ import java.util.HashMap;
 //                }})
 //                .script(new Script("count > 0"));
 //    }
+    protected BucketSelectorPipelineAggregationBuilder getBucketSelectorAggregationBuilder() {
 
-        protected BucketSelectorPipelineAggregationBuilder getBucketSelectorAggregationBuilder() {
-
-            BucketSelectorPipelineAggregationBuilder bucketSelectorPipelineAggregationBuilder = PipelineAggregatorBuilders.bucketSelector("bucket_filter", new HashMap<String, String>() {{
-                put("count", "date_range>_count");
-            }}, new Script("count > 0"));
+        BucketSelectorPipelineAggregationBuilder bucketSelectorPipelineAggregationBuilder = PipelineAggregatorBuilders.bucketSelector("bucket_filter", new HashMap<String, String>() {{
+            put("count", "date_range>_count");
+        }}, new Script("count > 0"));
 
 //            BucketScriptPipelineAggregationBuilder bucketSelectorPipelineAggregationBuilder2 = PipelineAggregatorBuilders.bucketScript("bucket_filter", new HashMap<String, String>() {{
 //                put("count", "date_range>_count");
 //            }}, new Script("count > 0"));
 
-            return  bucketSelectorPipelineAggregationBuilder;
+        return bucketSelectorPipelineAggregationBuilder;
 
-        }
+    }
 
 }
