@@ -21,24 +21,9 @@ import java.util.HashMap;
 
 public class CategoryRankingCommandParameter {
 
-    /**
-     * regionId
-     */
-    private Integer regionId;
-
-    /**
-     * categoryIdLv1
-     */
-    private Integer categoryIdLv1;
-
-    /**
-     * categoryIdLv3
-     */
-    private Integer categoryIdLv3;
 
     /**
      * outputLv
-     * カテゴリ出力レベル(1 or 3) default: 3
      */
     private Integer outputLv;
 
@@ -235,21 +220,21 @@ public class CategoryRankingCommandParameter {
     }
 
 
-    private BoolQueryBuilder getCategoryFilter() {
-        BoolQueryBuilder categoryFilter = QueryBuilders.boolQuery();
-
-        if (this.categoryIdLv1 != null) {
-            categoryFilter.must(
-                    QueryBuilders.termQuery("category.id_1", this.categoryIdLv1));
-        }
-
-        if (this.categoryIdLv3 != null) {
-            categoryFilter.must(
-                    QueryBuilders.termQuery("category.id_3", this.categoryIdLv3));
-        }
-
-        return categoryFilter;
-    }
+//    private BoolQueryBuilder getCategoryFilter() {
+//        BoolQueryBuilder categoryFilter = QueryBuilders.boolQuery();
+//
+//        if (this.categoryIdLv1 != null) {
+//            categoryFilter.must(
+//                    QueryBuilders.termQuery("category.id_1", this.categoryIdLv1));
+//        }
+//
+//        if (this.categoryIdLv3 != null) {
+//            categoryFilter.must(
+//                    QueryBuilders.termQuery("category.id_3", this.categoryIdLv3));
+//        }
+//
+//        return categoryFilter;
+//    }
 
 //    /* Aggregation filter */
 //
