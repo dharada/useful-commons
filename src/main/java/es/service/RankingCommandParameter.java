@@ -19,7 +19,7 @@ import java.util.HashMap;
 //import org.elasticsearch.search.aggregations.pipeline.having.BucketSelectorBuilder;
 
 
-public class CategoryRankingCommandParameter {
+public class RankingCommandParameter {
 
 
     /**
@@ -48,7 +48,7 @@ public class CategoryRankingCommandParameter {
 //     * @param size
 //     * @author Keisuke Tanaka
 //     */
-//    public CategoryRankingCommandParameter(
+//    public RankingCommandParameter(
 //            CustomerEntity customer,
 //            ZonedDateTime fromDate,
 //            ZonedDateTime toDate,
@@ -65,7 +65,7 @@ public class CategoryRankingCommandParameter {
 //     * @param from
 //     * @param size
 //     */
-//    public CategoryRankingCommandParameter(
+//    public RankingCommandParameter(
 //            CustomerEntity customer,
 //            ZonedDateTime fromDate,
 //            ZonedDateTime toDate,
@@ -81,7 +81,7 @@ public class CategoryRankingCommandParameter {
 //     * @param from
 //     * @param size
 //     */
-//    public CategoryRankingCommandParameter(
+//    public RankingCommandParameter(
 //            ZonedDateTime fromDate,
 //            ZonedDateTime toDate,
 //            Integer from,
