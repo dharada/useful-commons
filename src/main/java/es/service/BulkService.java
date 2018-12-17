@@ -1,8 +1,3 @@
-/**
- * Copyright (c) Mizuho Securities Co., Ltd. All Rights Reserved.
- * <p>
- * {LICENSE DESCRIPTION}
- */
 package es.service;
 
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
