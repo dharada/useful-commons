@@ -81,6 +81,7 @@ public class HighLevelRestClientTest {
 
             restHighLevelClient = new RestHighLevelClient(builder);
 
+
             // do sth
             aggregateData(restHighLevelClient);
 
