@@ -5,6 +5,7 @@ import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 import parser.JodaParser;
 
@@ -27,12 +28,14 @@ public class DateTimeUtilTest {
     public static final Clock wallClock = () -> new DateTime();
     private static Clock defaultClock = wallClock;
 
+    @Ignore
     @Test
     public void testYyyyMMdd() throws Exception {
         assertThat(DateTimeUtil.yyyyMMdd(), Matchers.containsString("/"));
     }
 
 
+    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void testDateTimeFormat() {
 

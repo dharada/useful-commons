@@ -63,27 +63,27 @@
 
             </plugin>
 			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<configuration>
-					<quiet>true</quiet>
-					<formats>
-						<format>xml</format>
-					</formats>
-					<instrumentation>
-						<ignoreTrivial>true</ignoreTrivial>
-					</instrumentation>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>cobertura</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--				<artifactId>cobertura-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					<quiet>true</quiet>-->
+<!--					<formats>-->
+<!--						<format>xml</format>-->
+<!--					</formats>-->
+<!--					<instrumentation>-->
+<!--						<ignoreTrivial>true</ignoreTrivial>-->
+<!--					</instrumentation>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>package</phase>-->
+<!--						<goals>-->
+<!--							<goal>cobertura</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
         </plugins>
 
     </build>
@@ -162,11 +162,12 @@
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
             <!--<version>5.6.13</version>-->
-          <version>6.2.4</version>
-        </dependency>
+            <!--<version>6.2.4</version>-->
+            <version>6.7.0</version>
+      </dependency>
 
 
-        <!--<dependency>-->
+      <!--<dependency>-->
             <!--<groupId>org.elasticsearch</groupId>-->
             <!--<artifactId>elasticsearch</artifactId>-->
             <!--&lt;!&ndash;<version>2.4.1</version>&ndash;&gt;-->

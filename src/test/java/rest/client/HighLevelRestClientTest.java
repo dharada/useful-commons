@@ -1,5 +1,6 @@
 package rest.client;
 
+import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -7,9 +8,14 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.SSLContexts;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.VersionType;
+import org.elasticsearch.index.engine.VersionConflictEngineException;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.net.ssl.SSLContext;
@@ -29,6 +35,7 @@ public class HighLevelRestClientTest {
 
 
     @Test
+    @Ignore
     public void testClient() {
 
         RestHighLevelClient client = new RestHighLevelClient(
@@ -41,6 +48,7 @@ public class HighLevelRestClientTest {
 
 
     @Test
+    @Ignore
     public void testSSLTLSClient() {
 
         String user = "elastic";
@@ -102,6 +110,19 @@ public class HighLevelRestClientTest {
     private void aggregateData(RestHighLevelClient restHighLevelClient) {
 
         // do something
+
+//        java.lang.String index = "my-index";
+//        IndexRequest request = new IndexRequest(
+//                index
+//                ,"type"
+//                ,id
+//        );
+//        request.versionType(VersionType.EXTERNAL);
+//        long ver = 0;
+//        request.version(ver);
+//
+//        RequestOptions options = null;
+//        restHighLevelClient.index(request, options);
 
 
     }
