@@ -62,10 +62,12 @@
                 </configuration>
 
             </plugin>
-			
+
+<!--            https://github.com/mojohaus/cobertura-maven-plugin/issues/43-->
 <!--			<plugin>-->
 <!--				<groupId>org.codehaus.mojo</groupId>-->
 <!--				<artifactId>cobertura-maven-plugin</artifactId>-->
+<!--                <version>2.7</version>-->
 <!--				<configuration>-->
 <!--					<quiet>true</quiet>-->
 <!--					<formats>-->
