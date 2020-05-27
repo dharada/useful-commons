@@ -17,14 +17,6 @@ public class KuromojiNumberFilterTests {
     @Test
     public void testNumberFilter() throws IOException {
 
-
-//        final Index index = new Index("kuromoji_sample", "_na_");
-//        final String name = "ngram_tokenizer";
-//        final Settings indexSettings = newAnalysisSettingsBuilder().build();
-//        Settings settings = newAnalysisSettingsBuilder().put("min_gram", 2).put("max_gram", 3).put("token_chars", "letter,digit,whitespace,punctuation,symbol").build();
-//        NGramTokenizerFactory nGramTokenizerFactory = new NGramTokenizerFactory(KuromojiNumberFilterTests.newIndexSettings(index, indexSettings, Settings.EMPTY), null, name, settings);
-//        CustomAnalyzer customAnalyzer = new CustomAnalyzer(nGramTokenizerFactory, null, new ArrayList<TokenFilterFactory>().add(japaneseNumberFilterFactory));
-
         String myInput = "三十一";
         myInput = "百二十";
         myInput = "五十三十一";
@@ -56,23 +48,5 @@ public class KuromojiNumberFilterTests {
 
 
     }
-
-//    public static IndexSettings newIndexSettings(Index index, Settings indexSetting, Settings nodeSettings, Setting<?>... setting) {
-//        Settings build = Settings.builder().put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT)
-//                .put(IndexMetaData.SETTING_NUMBER_OF_REPLICAS, 1)
-//                .put(IndexMetaData.SETTING_NUMBER_OF_SHARDS, 1)
-//                .put(indexSetting)
-//                .build();
-//        IndexMetaData metaData = IndexMetaData.builder(index.getName()).settings(build).build();
-//        Set<Setting<?>> settingSet = new HashSet<>(IndexScopedSettings.BUILT_IN_INDEX_SETTINGS);
-//        if (setting.length > 0) {
-//            settingSet.addAll(Arrays.asList(setting));
-//        }
-//        return new IndexSettings(metaData, nodeSettings, new IndexScopedSettings(Settings.EMPTY, settingSet));
-//    }
-//
-//    public Settings.Builder newAnalysisSettingsBuilder() {
-//        return Settings.builder().put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT);
-//    }
 
 }
