@@ -10,8 +10,6 @@ import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.IncludeExclude;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
-import org.elasticsearch.search.aggregations.pipeline.PipelineAggregatorBuilders;
-import org.elasticsearch.search.aggregations.pipeline.bucketselector.BucketSelectorPipelineAggregationBuilder;
 
 import java.util.HashMap;
 
@@ -274,18 +272,18 @@ public class RankingCommandParameter {
 //                }})
 //                .script(new Script("count > 0"));
 //    }
-    protected BucketSelectorPipelineAggregationBuilder getBucketSelectorAggregationBuilder() {
-
-        BucketSelectorPipelineAggregationBuilder bucketSelectorPipelineAggregationBuilder = PipelineAggregatorBuilders.bucketSelector("bucket_filter", new HashMap<String, String>() {{
-            put("count", "date_range>_count");
-        }}, new Script("count > 0"));
-
-//            BucketScriptPipelineAggregationBuilder bucketSelectorPipelineAggregationBuilder2 = PipelineAggregatorBuilders.bucketScript("bucket_filter", new HashMap<String, String>() {{
-//                put("count", "date_range>_count");
-//            }}, new Script("count > 0"));
-
-        return bucketSelectorPipelineAggregationBuilder;
-
-    }
+//    protected BucketSelectorPipelineAggregationBuilder getBucketSelectorAggregationBuilder() {
+//
+//        BucketSelectorPipelineAggregationBuilder bucketSelectorPipelineAggregationBuilder = PipelineAggregatorBuilders.bucketSelector("bucket_filter", new HashMap<String, String>() {{
+//            put("count", "date_range>_count");
+//        }}, new Script("count > 0"));
+//
+////            BucketScriptPipelineAggregationBuilder bucketSelectorPipelineAggregationBuilder2 = PipelineAggregatorBuilders.bucketScript("bucket_filter", new HashMap<String, String>() {{
+////                put("count", "date_range>_count");
+////            }}, new Script("count > 0"));
+//
+//        return bucketSelectorPipelineAggregationBuilder;
+//
+//    }
 
 }

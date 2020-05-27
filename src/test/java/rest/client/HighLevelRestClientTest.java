@@ -84,8 +84,8 @@ public class HighLevelRestClientTest {
 
             builder.setRequestConfigCallback(requestConfigBuilder -> requestConfigBuilder
                     .setConnectTimeout(5000)
-                    .setSocketTimeout(60000))
-                    .setMaxRetryTimeoutMillis(60000);
+                    .setSocketTimeout(60000));
+//                    .setMaxRetryTimeoutMillis(60000);
 
             restHighLevelClient = new RestHighLevelClient(builder);
 
