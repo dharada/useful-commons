@@ -10,6 +10,9 @@ import org.junit.Test;
 import parser.JodaParser;
 
 import java.time.Clock;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Locale;
 
 import static org.junit.Assert.assertThat;
@@ -27,6 +30,12 @@ public class DateTimeUtilTest {
 
     public static final Clock wallClock = () -> new DateTime();
     private static Clock defaultClock = wallClock;
+
+    @Test
+    public void testZoneId() {
+        java.time.format.DateTimeFormatter timeFormatter = java.time.format.DateTimeFormatter.ofPattern("MM/dd HH:mm");
+        System.out.println(timeFormatter.format(ZonedDateTime.now(ZoneId.of("Asia/Tokyo")).toLocalDateTime()));
+    }
 
     @Ignore
     @Test
