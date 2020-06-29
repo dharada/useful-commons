@@ -1,4 +1,4 @@
-package org.elasticsearch.analysis.common;
+package my.analysis.common;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
