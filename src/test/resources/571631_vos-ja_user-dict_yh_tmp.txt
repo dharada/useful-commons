@@ -1,0 +1,9 @@
+kids,kids,kids,カスタム名詞
+baby,baby,baby,カスタム名詞
+kidsbaby001,kidsbaby001,kidsbaby001,カスタム名詞
+kids-baby-001,kids-baby-001,kids-baby-001,カスタム名詞
+kids_baby_001,kids_baby_001,kids_baby_001,カスタム名詞
+kidsbaby001kwd,kidsbaby001kwd,kidsbaby001kwd,カスタム名詞
+kwdkidsbaby001,kwdkidsbaby001,kwdkidsbaby001,カスタム名詞
+kwd-kids-baby-001,kwd-kids-baby-001,kwd-kids-baby-001,カスタム名詞
+kwd_kids_baby_001,kwd_kids_baby_001,kwd_kids_baby_001,カスタム名詞

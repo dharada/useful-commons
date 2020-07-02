@@ -1,0 +1,7 @@
+子供服 => kidsbaby001
+子供服 => kids-baby-001
+子供服 => kids_baby_001
+子供服 => kidsbaby001kwd
+子供服 => kwdkidsbaby001
+子供服 => kwd-kids-baby-001
+子供服 => kwd_kids_baby_001
