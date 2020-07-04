@@ -32,9 +32,6 @@ public class SynonymTokenFilter571631Tests {
 
         TokenStream tokenStream = getTokenStreamForSynonymTokenFilter(tokenizer);
 
-//        LowerCaseFilterFactory lowerCaseFilterFactory = new LowerCaseFilterFactory(new HashMap<>());
-//        TokenStream tokenStream = lowerCaseFilterFactory.create(tokenizer);
-
         OffsetAttribute offsetAtt = tokenStream.addAttribute(OffsetAttribute.class);
         CharTermAttribute charTermAttr = tokenStream.addAttribute(CharTermAttribute.class);
         PositionIncrementAttribute positionIncrementAttribute = tokenStream.addAttribute(PositionIncrementAttribute.class);
