@@ -5,6 +5,7 @@ import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer;
 import org.apache.lucene.analysis.ja.dict.UserDictionary;
 import org.apache.lucene.analysis.synonym.SynonymFilterFactory;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.util.ClasspathResourceLoader;
 import org.apache.lucene.util.AttributeImpl;
@@ -26,7 +27,7 @@ public class SynonymTokenFilter571631Tests {
         JapaneseTokenizer tokenizer =
                 new JapaneseTokenizer(
                         UserDictionary.open(
-                                new FileReader(new File("/mnt/buffalo/daisuke/github/dharada/useful-commons/src/test/resources/571631_vos-ja_user-dict_yh_tmp.txt"))), true, JapaneseTokenizer.Mode.NORMAL);
+                                new FileReader(new File("/mnt/buffalo/daisuke/github/dharada/useful-commons/src/test/resources/571631_vos-ja_user-dict_yh_tmp.txt"))), true, JapaneseTokenizer.Mode.SEARCH);
 
         TokenStream tokenStream = getTokenStreamForSynonymTokenFilter(tokenizer);
 
@@ -34,6 +35,7 @@ public class SynonymTokenFilter571631Tests {
 //        TokenStream tokenStream = lowerCaseFilterFactory.create(tokenizer);
 
         OffsetAttribute offsetAtt = tokenStream.addAttribute(OffsetAttribute.class);
+        CharTermAttribute charTermAttr = tokenStream.addAttribute(CharTermAttribute.class);
 
         try {
             tokenStream.reset(); // Resets this stream to the beginning. (Required)
@@ -42,7 +44,7 @@ public class SynonymTokenFilter571631Tests {
                 // Use AttributeSource.reflectAsString(boolean)
                 // for token stream debugging.
 
-                outs(tokenStream, offsetAtt);
+                outs(tokenStream, offsetAtt, charTermAttr);
 
             }
 
@@ -54,21 +56,14 @@ public class SynonymTokenFilter571631Tests {
 
     }
 
-    private void outs(TokenStream tokenStream, OffsetAttribute offsetAtt) {
+    private void outs(TokenStream tokenStream, OffsetAttribute offsetAtt, CharTermAttribute charTermAttr) {
+
+        String token = charTermAttr.toString();
+        System.out.println("token: " + token);
 
         Iterator<AttributeImpl> attributeImplsIterator = tokenStream.getAttributeImplsIterator();
 
-        //        while (attributeImplsIterator.hasNext()) {
-//            AttributeImpl next = attributeImplsIterator.next();
-////            System.out.println(next.getClass().getName());
-//
-//            if (next.getClass().equals(org.apache.lucene.analysis.tokenattributes.PackedTokenAttributeImpl.class)){
-//                System.out.println(next.toString());
-//            }
-//
-//        }
-
-        System.out.println("token: " + tokenStream.reflectAsString(true));
+//        System.out.println("token: " + tokenStream.reflectAsString(true));
         System.out.println("token start offset: " + offsetAtt.startOffset());
         System.out.println("token end offset: " + offsetAtt.endOffset());
     }
