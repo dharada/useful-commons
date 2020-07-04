@@ -2,28 +2,33 @@ package my.analysis.common;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.ja.JapaneseTokenizerFactory;
+import org.apache.lucene.analysis.ja.JapaneseTokenizer;
+import org.apache.lucene.analysis.ja.dict.UserDictionary;
 import org.apache.lucene.analysis.synonym.SynonymFilterFactory;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.util.ClasspathResourceLoader;
 import org.apache.lucene.util.AttributeImpl;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class SynonymTokenFilter571631Tests {
 
     @Test
     public void testSynonymTokenFilter() throws IOException {
 
-        JapaneseTokenizerFactory japaneseTokenizerFactory = getJapaneseTokenizerFactory();
+        JapaneseTokenizer tokenizer =
+                new JapaneseTokenizer(
+                        UserDictionary.open(
+                                new FileReader(new File("/mnt/buffalo/daisuke/github/dharada/useful-commons/src/test/resources/571631_vos-ja_user-dict_yh_tmp.txt"))), true, JapaneseTokenizer.Mode.NORMAL);
 
-        TokenStream tokenStream = getTokenStreamForSynonymTokenFilter(japaneseTokenizerFactory);
+        TokenStream tokenStream = getTokenStreamForSynonymTokenFilter(tokenizer);
 
 //        LowerCaseFilterFactory lowerCaseFilterFactory = new LowerCaseFilterFactory(new HashMap<>());
 //        TokenStream tokenStream = lowerCaseFilterFactory.create(tokenizer);
@@ -68,27 +73,13 @@ public class SynonymTokenFilter571631Tests {
         System.out.println("token end offset: " + offsetAtt.endOffset());
     }
 
-    private JapaneseTokenizerFactory getJapaneseTokenizerFactory() throws IOException {
+    private TokenStream getTokenStreamForSynonymTokenFilter(Tokenizer tokenizer) throws IOException {
 
-        Map<String, String> settingsMapForTokenizer = new HashMap<>();
-        String userDictionaryKey = "userDictionary";
-        settingsMapForTokenizer.put(userDictionaryKey, "571631_vos-ja_user-dict_yh_tmp.txt");
-
-        JapaneseTokenizerFactory japaneseTokenizerFactory = new JapaneseTokenizerFactory(settingsMapForTokenizer);
-        japaneseTokenizerFactory.inform(new ClasspathResourceLoader());
-
-        return japaneseTokenizerFactory;
-    }
-
-    private TokenStream getTokenStreamForSynonymTokenFilter(JapaneseTokenizerFactory japaneseTokenizerFactory) throws IOException {
-
-        Tokenizer tokenizer = japaneseTokenizerFactory.create();
         String myInput = "子供服";
         tokenizer.setReader(new StringReader(myInput));
 
         Map<String, String> synonymsSettingMap = new HashMap<>();
         synonymsSettingMap.put("synonyms", "571631_vos-ja_contract-synonym_yh_tmp.txt");
-//        synonymsSettingMap.put("tokenizerFactory", "org.apache.lucene.analysis.ja.JapaneseTokenizerFactory");
         SynonymFilterFactory synonymFilterFactory = new SynonymFilterFactory(synonymsSettingMap);
         synonymFilterFactory.inform(new ClasspathResourceLoader());
 
