@@ -67,6 +67,8 @@ public class SynonymTokenFilterTests {
 
         Map<String, String> synonymsSettingMap = new HashMap<>();
         synonymsSettingMap.put("synonyms", "vos-ja_contract-synonym_yh_tmp.txt");
+//        synonymsSettingMap.put("tokenizerFactory", "org.apache.lucene.analysis.ja.JapaneseTokenizerFactory");
+
         SynonymFilterFactory synonymFilterFactory = new SynonymFilterFactory(synonymsSettingMap);
         synonymFilterFactory.inform(new ClasspathResourceLoader());
 

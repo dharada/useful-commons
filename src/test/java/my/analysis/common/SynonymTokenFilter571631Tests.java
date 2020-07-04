@@ -28,7 +28,7 @@ public class SynonymTokenFilter571631Tests {
         JapaneseTokenizer tokenizer =
                 new JapaneseTokenizer(
                         UserDictionary.open(
-                                new FileReader(new File("/mnt/buffalo/daisuke/github/dharada/useful-commons/src/test/resources/571631_vos-ja_user-dict_yh_tmp.txt"))), true, JapaneseTokenizer.Mode.NORMAL);
+                                new FileReader(new File("/mnt/buffalo/daisuke/github/dharada/useful-commons/src/test/resources/571631_vos-ja_user-dict_yh_tmp.txt"))), true, JapaneseTokenizer.DEFAULT_MODE);
 
         TokenStream tokenStream = getTokenStreamForSynonymTokenFilter(tokenizer);
 
