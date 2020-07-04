@@ -7,6 +7,7 @@ import org.apache.lucene.analysis.ja.dict.UserDictionary;
 import org.apache.lucene.analysis.synonym.SynonymFilterFactory;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.util.ClasspathResourceLoader;
 import org.apache.lucene.util.AttributeImpl;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class SynonymTokenFilter571631Tests {
         JapaneseTokenizer tokenizer =
                 new JapaneseTokenizer(
                         UserDictionary.open(
-                                new FileReader(new File("/mnt/buffalo/daisuke/github/dharada/useful-commons/src/test/resources/571631_vos-ja_user-dict_yh_tmp.txt"))), true, JapaneseTokenizer.Mode.SEARCH);
+                                new FileReader(new File("/mnt/buffalo/daisuke/github/dharada/useful-commons/src/test/resources/571631_vos-ja_user-dict_yh_tmp.txt"))), true, JapaneseTokenizer.Mode.NORMAL);
 
         TokenStream tokenStream = getTokenStreamForSynonymTokenFilter(tokenizer);
 
@@ -36,6 +37,8 @@ public class SynonymTokenFilter571631Tests {
 
         OffsetAttribute offsetAtt = tokenStream.addAttribute(OffsetAttribute.class);
         CharTermAttribute charTermAttr = tokenStream.addAttribute(CharTermAttribute.class);
+        PositionIncrementAttribute positionIncrementAttribute = tokenStream.addAttribute(PositionIncrementAttribute.class);
+
 
         try {
             tokenStream.reset(); // Resets this stream to the beginning. (Required)
@@ -44,7 +47,7 @@ public class SynonymTokenFilter571631Tests {
                 // Use AttributeSource.reflectAsString(boolean)
                 // for token stream debugging.
 
-                outs(tokenStream, offsetAtt, charTermAttr);
+                outs(tokenStream, offsetAtt, charTermAttr, positionIncrementAttribute);
 
             }
 
@@ -56,16 +59,20 @@ public class SynonymTokenFilter571631Tests {
 
     }
 
-    private void outs(TokenStream tokenStream, OffsetAttribute offsetAtt, CharTermAttribute charTermAttr) {
+    private void outs(TokenStream tokenStream, OffsetAttribute offsetAtt, CharTermAttribute charTermAttr, PositionIncrementAttribute positionIncrementAttribute) {
 
         String token = charTermAttr.toString();
-        System.out.println("token: " + token);
+//        String positionIncrementAttr = positionIncrementAttribute.toString();
+
+
+//        System.out.println("positionIncrementAttribute: " + positionIncrementAttr);
 
         Iterator<AttributeImpl> attributeImplsIterator = tokenStream.getAttributeImplsIterator();
-
 //        System.out.println("token: " + tokenStream.reflectAsString(true));
+        System.out.println("token: " + token);
         System.out.println("token start offset: " + offsetAtt.startOffset());
-        System.out.println("token end offset: " + offsetAtt.endOffset());
+        System.out.println("token end offset: " + offsetAtt.endOffset() + "\n");
+
     }
 
     private TokenStream getTokenStreamForSynonymTokenFilter(Tokenizer tokenizer) throws IOException {
