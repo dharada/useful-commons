@@ -4,6 +4,8 @@ package json;
 
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,14 +20,19 @@ public class JsonParsing {
 
     public static void main(String[] args) throws IOException {
 
-        new JsonParsing().parse("");
+        Path file = Paths.get("/Users/daisuke.harada/desk/untitled-BACKUP2");
+
+        String fileStringWithLF = Files.readString(file);
+        new JsonParsing().descape(fileStringWithLF);
+       // new JsonParsing().parse("");
 
     }
     public void parse(String text) throws IOException {
 
-        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
+//        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
 
-        Path file = Paths.get("/Users/daisuke.harada/desk/untitled");
+//        Path file = Paths.get("/Users/daisuke.harada/desk/untitled");
+        Path file = Paths.get("/Users/daisuke.harada/desk/untitled-BACKUP");
 
         String fileStringWithLF = Files.readString(file);
         String fileStrWithCRLF = fileStringWithLF.replaceAll("\n", "\r\n");
@@ -39,5 +46,16 @@ public class JsonParsing {
 //        System.out.println("After escaping.");
 //        text = jsonObject.escape(text);
 //        System.out.println(text);
+    }
+
+    public void descape(String json) {
+
+        try {
+            System.out.println(new JSONParser().parse(json));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }
