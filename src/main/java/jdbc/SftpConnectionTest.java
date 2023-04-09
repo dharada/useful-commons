@@ -31,7 +31,7 @@ public class SftpConnectionTest {
                     "FROM Employee e " +
                     "LEFT OUTER JOIN Dept d ON e.deptId = d.id \n" +
                     "INNER JOIN EmployeeGroups eg ON e.empId = eg.empId \n" +
-                    "INNER JOIN Groups gs ON eg.groupId = gs.groupId GROUP BY empId";
+                    "INNER JOIN Groups gs ON eg.groupId = gs.groupId";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
