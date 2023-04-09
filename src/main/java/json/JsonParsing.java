@@ -20,11 +20,7 @@ public class JsonParsing {
 
     public static void main(String[] args) throws IOException {
 
-        Path file = Paths.get("/Users/daisuke.harada/desk/untitled-BACKUP2");
-
-        String fileStringWithLF = Files.readString(file);
-        new JsonParsing().descape(fileStringWithLF);
-       // new JsonParsing().parse("");
+        new JsonParsing().parse("");
 
     }
     public void parse(String text) throws IOException {
@@ -32,7 +28,8 @@ public class JsonParsing {
 //        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
 
 //        Path file = Paths.get("/Users/daisuke.harada/desk/untitled");
-        Path file = Paths.get("/Users/daisuke.harada/desk/untitled-BACKUP");
+        //Path file = Paths.get("/home/daisuke/desk/beforeProvisioning.txt");
+        Path file = Paths.get("/home/daisuke/desk/jdbc-txt");
 
         String fileStringWithLF = Files.readString(file);
         String fileStrWithCRLF = fileStringWithLF.replaceAll("\n", "\r\n");
@@ -48,14 +45,4 @@ public class JsonParsing {
 //        System.out.println(text);
     }
 
-    public void descape(String json) {
-
-        try {
-            System.out.println(new JSONParser().parse(json));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
 }
