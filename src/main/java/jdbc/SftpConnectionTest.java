@@ -31,15 +31,8 @@ public class SftpConnectionTest {
                     "FROM Employee e \n " +
                     "LEFT OUTER JOIN Dept d ON e.deptId = d.id ";
 
-//            sql = "SELECT e.empId as empId, e.fullName as fullName, e.email, e.contactNo, d.deptName as deptName, d.role as role \n" +
-//                    "                    FROM Employee e \n" +
-//                    "                    LEFT OUTER JOIN Dept d ON e.deptId = d.id where e.empId= 1 ";
-
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-//            while (rs.next()) {
-//                System.out.println(rs.getString("fullName") + " " + rs.getString("deptName") + " " +  rs.getString("role"));
-//            }
 
             while(rs.next()) {
                 for(int i=1; i<=rs.getMetaData().getColumnCount(); i++) {
