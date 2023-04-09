@@ -4,6 +4,7 @@
 .gradle
 bin/
 tmp/
+.gitignore
 *.tmp
 *.bak
 *.swp
