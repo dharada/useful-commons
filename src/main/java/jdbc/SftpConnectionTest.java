@@ -27,8 +27,11 @@ public class SftpConnectionTest {
 
 
             // Test the connection by querying a file on the server
-            String sql = "SELECT e.empId as empId, e.fullName as fullName, e.email, e.contactNo, d.deptName as deptName, d.role as role, CONCAT('\"', GROUP_CONCAT(gs.groupName SEPARATOR ','), '\"') AS groupName \n" +
-                    "FROM Employee e LEFT OUTER JOIN Dept d ON e.deptId = d.id INNER JOIN EmployeeGroups eg ON e.empId = eg.empId INNER JOIN Groups gs ON eg.groupId = gs.groupId GROUP BY empId";
+            String sql = "SELECT e.empId as empId, e.fullName as fullName, e.email, e.contactNo, d.deptName as deptName, d.role as role, gs.groupName as groupName \n" +
+                    "FROM Employee e " +
+                    "LEFT OUTER JOIN Dept d ON e.deptId = d.id \n" +
+                    "INNER JOIN EmployeeGroups eg ON e.empId = eg.empId \n" +
+                    "INNER JOIN Groups gs ON eg.groupId = gs.groupId GROUP BY empId";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
