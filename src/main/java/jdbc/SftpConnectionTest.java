@@ -78,19 +78,14 @@ public class SftpConnectionTest {
   }
 
   private static String getPassword() {
-
-
     Properties properties = new Properties();
-
     try (InputStream inputStream = SftpConnectionTest.class.getResourceAsStream("/sftp-connection-config.properties")) {
       properties.load(inputStream);
     } catch (IOException e) {
       e.printStackTrace();
     }
-
     // Retrieve properties
     return properties.getProperty("password");
-
   }
 
 }
