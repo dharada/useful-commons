@@ -12,78 +12,86 @@ import java.util.Properties;
 public class SftpConnectionTest {
 
 
-    public static void main(String[] args) {
-        try {
-            // Load the HXTT Text JDBC driver
-            Class.forName("com.hxtt.sql.text.TextDriver");
+  public static void main(String[] args) {
+    try {
+      // Load the HXTT Text JDBC driver
+      Class.forName("com.hxtt.sql.text.TextDriver");
+      // https://documentation.sailpoint.com/connectors/sql_loader/help/integrating_sql_loader/data_files_url.html
+      String jdbcUrl = "jdbc:csv:/sftp://4.216.148.102:22/oneerp?user=daisuke&password=" +
+              getPassword();
 
-            // Define the JDBC URL for the SFTP server
-            String jdbcUrl = "jdbc:csv:/sftp://52.140.192.205:22/sqlloader?user=daisuke&password=" +
-                    getPassword();
+      Properties props = new Properties();
+      props.put("_CSV_Header", "true");
+      // for tsv
+      //props.put("_CSV_Separator", "\t");
+      props.put("_CSV_Separator", ",");
 
-            Properties props = new Properties();
-            props.put("_CSV_Header", "true");
-            props.put("_CSV_Separator", ",");
+      // Connect to the SFTP server
+      Connection conn = DriverManager.getConnection(jdbcUrl, props);
 
-            // Connect to the SFTP server
-            Connection conn = DriverManager.getConnection(jdbcUrl, props);
+      //login,first,last,status,locked
 
+      // Test the connection by querying a file on the server
+      String sql =
+              "SELECT u.login as login, u.first as first, u.last as last, u.status as status, u.locked as locked, " +
+                      "ug.group_name as groups," +
 
-            // Test the connection by querying a file on the server
-            String sql =
-                    "SELECT e.empId as empId, e.fullName as fullName, e.email, e.contactNo, d.deptName as deptName, d.role as role\n" +
-                            "                    FROM Employee e \n" +
-                            "                    LEFT OUTER JOIN EmpDept d ON e.empId = d.empId";
+                      " CASE\n" +
+                      "    WHEN status = 'inactive' THEN 'true'\n" +
+                      "    ELSE 'false'\n" +
+                      "  END AS IIQDisabled\n" +
 
-//            sql = "select roles.role as role, roles.description as description from Roles roles INNER JOIN EmpDept d ON roles.role = d.role group by roles.role";
-
-            //     sql  = "select r.role as role, r.description as description from Roles r";
-
-
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            int rowIndex = 0;
-            while (rs.next()) {
-
-                if (rowIndex == 0) {
-                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                        System.out.print(rs.getMetaData().getColumnName(i) + "\t");
-                    }
-                    System.out.println();
-                }
-
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                }
-                System.out.println();
-                rowIndex++;
-            }
-
-            // Close the connection
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String getPassword() {
+                      "                    FROM Users u \n" +
+                      "                    LEFT OUTER JOIN Users_groups ug ON u.login = ug.login ORDER BY login";
 
 
-        Properties properties = new Properties();
+      // for tsv
+      //sql = "SELECT * from Userstsv";
 
-        try (InputStream inputStream = SftpConnectionTest.class.getResourceAsStream("/sftp-connection-config.properties")) {
-            properties.load(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(sql);
+
+      int rowIndex = 0;
+      while (rs.next()) {
+
+        if (rowIndex == 0) {
+          for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+            System.out.print(rs.getMetaData().getColumnName(i) + "\t");
+          }
+          System.out.println();
         }
 
-        // Retrieve properties
-        return properties.getProperty("password");
+        for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+          System.out.print(rs.getString(i) + "\t");
+        }
+        System.out.println();
+        rowIndex++;
+      }
 
+      // Close the connection
+      rs.close();
+      stmt.close();
+      conn.close();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
+
+  private static String getPassword() {
+
+
+    Properties properties = new Properties();
+
+    try (InputStream inputStream = SftpConnectionTest.class.getResourceAsStream("/sftp-connection-config.properties")) {
+      properties.load(inputStream);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    // Retrieve properties
+    return properties.getProperty("password");
+
+  }
 
 }
 
