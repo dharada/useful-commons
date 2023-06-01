@@ -17,25 +17,42 @@ import java.util.Map;
 
 public class JsonParsing {
 
-
-    public static void main(String[] args) throws IOException {
-
-        new JsonParsing().parse("");
-
+  public static boolean startsWithIgnoreCase(String str, String prefix) {
+    if (str.length() < prefix.length()) {
+      return false;
     }
-    public void parse(String text) throws IOException {
+    String strLower = str.substring(0, prefix.length()).toLowerCase();
+    String prefixLower = prefix.toLowerCase();
+    return strLower.equals(prefixLower);
+  }
+
+  public static void main(String[] args) throws IOException {
+
+
+    String str = "ハロー, World!";
+    String prefix = "ハ";
+
+    boolean startsWith = startsWithIgnoreCase(str, prefix);
+    System.out.println(startsWith); // Output: true
+
+
+    new JsonParsing().parse("");
+
+  }
+
+  public void parse(String text) throws IOException {
 
 //        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
 
 //        Path file = Paths.get("/Users/daisuke.harada/desk/untitled");
-        //Path file = Paths.get("/home/daisuke/desk/beforeProvisioning.txt");
-        Path file = Paths.get("/home/daisuke/desk/jdbc-txt");
+    //Path file = Paths.get("/home/daisuke/desk/beforeProvisioning.txt");
+    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/TestProvisioning.txt");
 
-        String fileStringWithLF = Files.readString(file);
-        String fileStrWithCRLF = fileStringWithLF.replaceAll("\n", "\r\n");
+    String fileStringWithLF = Files.readString(file);
+    String fileStrWithCRLF = fileStringWithLF.replaceAll("\n", "\r\n");
 
 
-        System.out.println(JSONObject.toString("script", fileStrWithCRLF));
+    System.out.println(JSONObject.toString("script", fileStrWithCRLF));
 
 //        JSONObject jsonObject = new JSONObject();
 //        String text = "Text with special character /\"\'\b\f\t\r\n.";
@@ -43,6 +60,6 @@ public class JsonParsing {
 //        System.out.println("After escaping.");
 //        text = jsonObject.escape(text);
 //        System.out.println(text);
-    }
+  }
 
 }

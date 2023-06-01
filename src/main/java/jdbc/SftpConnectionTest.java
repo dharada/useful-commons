@@ -14,17 +14,29 @@ public class SftpConnectionTest {
 
   public static void main(String[] args) {
     try {
+
+      boolean tsv = true;
+
       // Load the HXTT Text JDBC driver
       Class.forName("com.hxtt.sql.text.TextDriver");
-      // https://documentation.sailpoint.com/connectors/sql_loader/help/integrating_sql_loader/data_files_url.html
-      String jdbcUrl = "jdbc:csv:/sftp://4.216.148.102:22/oneerp?user=daisuke&password=" +
-              getPassword();
+
+
+      String jdbcUrl = null;
+      if (tsv) {
+        jdbcUrl = "jdbc:csv:/sftp://4.216.148.102:22/billing?user=daisuke&password=" +
+                getPassword();
+      } else {
+        jdbcUrl = "jdbc:csv:/sftp://4.216.148.102:22/oneerp?user=daisuke&password=" +
+                getPassword();
+      }
 
       Properties props = new Properties();
       props.put("_CSV_Header", "true");
-      // for tsv
-      //props.put("_CSV_Separator", "\t");
+
       props.put("_CSV_Separator", ",");
+      if (tsv) {
+        props.put("_CSV_Separator", "\t");
+      }
 
       // Connect to the SFTP server
       Connection conn = DriverManager.getConnection(jdbcUrl, props);
@@ -45,8 +57,17 @@ public class SftpConnectionTest {
                       "                    LEFT OUTER JOIN Users_groups ug ON u.login = ug.login ORDER BY login";
 
 
-      // for tsv
-      //sql = "SELECT * from Userstsv";
+      if (tsv) {
+
+        // for tsv
+//      sql = "select MAX('BillingSystemUser') as name from Users";
+        //    sql = "select 'BillingSystemUser' as name";
+        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, ug.GROUP_NAME as groups FROM Users u\n" +
+                "              LEFT OUTER JOIN UsersGroups ug ON u.MAIL_ADDRESS = ug.MAIL_ADDRESS ORDER BY MAIL_ADDRESS";
+
+        //sql = "select ug.MAIL_ADDRESS as MAIL_ADDRESS, ug.GROUP_NAME as groups from UsersGroups ug";
+      }
+
 
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(sql);
