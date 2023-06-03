@@ -20,20 +20,19 @@ public class SftpConnectionTest {
       // Load the HXTT Text JDBC driver
       Class.forName("com.hxtt.sql.text.TextDriver");
 
-
       String jdbcUrl = null;
       if (tsv) {
-        jdbcUrl = "jdbc:csv:/sftp://4.216.148.102:22/billing?user=daisuke&password=" +
+        jdbcUrl = "jdbc:csv:/sftp://20.243.255.91:22/oneerp?user=daisuke&password=" +
                 getPassword();
       } else {
-        jdbcUrl = "jdbc:csv:/sftp://4.216.148.102:22/oneerp?user=daisuke&password=" +
+        jdbcUrl = "jdbc:csv:/sftp://20.243.255.91:22/oneerp?user=daisuke&password=" +
                 getPassword();
       }
 
       Properties props = new Properties();
       props.put("_CSV_Header", "true");
-
       props.put("_CSV_Separator", ",");
+
       if (tsv) {
         props.put("_CSV_Separator", "\t");
       }
@@ -58,19 +57,41 @@ public class SftpConnectionTest {
 
 
       if (tsv) {
+//        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, ug.GROUP_NAME as groups FROM Users u\n" +
+//                "              LEFT OUTER JOIN UsersGroups ug ON u.MAIL_ADDRESS = ug.MAIL_ADDRESS ORDER BY COLLATE(MAIL_ADDRESS,'GERMAN')";
 
-        // for tsv
-//      sql = "select MAX('BillingSystemUser') as name from Users";
-        //    sql = "select 'BillingSystemUser' as name";
-        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, ug.GROUP_NAME as groups FROM Users u\n" +
-                "              LEFT OUTER JOIN UsersGroups ug ON u.MAIL_ADDRESS = ug.MAIL_ADDRESS ORDER BY MAIL_ADDRESS";
+        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, 'BillingSystemUser' as groups FROM Users u ORDER BY MAIL_ADDRESS";
 
-        //sql = "select ug.MAIL_ADDRESS as MAIL_ADDRESS, ug.GROUP_NAME as groups from UsersGroups ug";
+        //BillingSystemUser
+//        sql = "SELECT MAX(MAIL_ADDRESS) as MAIL_ADDRESS FROM Users as U WHERE U.MAIL_ADDRESS = 'Demo1@sai.com'";
+//        sql = "SELECT MAX(MAIL_ADDRESS) as MAIL_ADDRESS FROM Users u";
+//        sql = "SELECT MAIL_ADDRESS FROM Users u WHERE u.MAIL_ADDRESS = 'Demo1@sai.com'";
+//        sql = "SELECT MAX(MAIL_ADDRESS) as MAIL_ADDRESS FROM Users U WHERE U.MAIL_ADDRESS = 'Demo1@sai.com'";
+//        sql = "SELECT MAX(MAIL_ADDRESS) as MAIL_ADDRESS FROM Users u WHERE u.MAIL_ADDRESS = 'Demo1@sai.com'";
+//        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, u.GROUP_NAME as group FROM Users u ORDER BY MAIL_ADDRESS";
+        sql = "SELECT MAX(MAIL_ADDRESS) as MAIL_ADDRESS FROM Users u WHERE u.MAIL_ADDRESS = 'Demo11.User11@sailpointdemodemoaaaa.com'";
+        //sql = "select ug.MAIL_ADDRESS as MAIL_ADDRESS, ug.GROUP_NAME aWs groups from UsersGroups ug";
+
+
+//        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, 'BillingSystemUser' as groups FROM Users u ORDER BY MAIL_ADDRESS";
+//
+//        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, 'BillingSystemUser' as groups FROM Users u WHERE MAIL_ADDRESS = 'Demo12.User12@sailpointdemodemoaaaa.com'";
+
+        sql = "DELETE FROM UsersCopy as U WHERE U.MAIL_ADDRESS = 'Demo14.User14@sailpointdemodemoaaaa.com'";
+
       }
 
-
       Statement stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery(sql);
+
+      if (isDelete(sql)) {
+        System.out.println(stmt.execute(sql));
+        return;
+      }
+
+      ResultSet rs = null;
+      if (isSelect(sql)) {
+        rs = stmt.executeQuery(sql);
+      }
 
       int rowIndex = 0;
       while (rs.next()) {
@@ -96,6 +117,14 @@ public class SftpConnectionTest {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  private static boolean isDelete(String sql) {
+    return sql.trim().startsWith("DELETE");
+  }
+
+  private static boolean isSelect(String sql) {
+    return sql.trim().startsWith("SELECT") || sql.trim().startsWith("select");
   }
 
   private static String getPassword() {
