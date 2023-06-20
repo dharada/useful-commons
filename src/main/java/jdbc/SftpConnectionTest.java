@@ -36,9 +36,9 @@ public class SftpConnectionTest {
 
       if (tsv) {
 
-        tsvSqlExamples();
+        sql = tsvSqlExamples();
 
-        sql = "DELETE FROM UsersCopy as U WHERE U.MAIL_ADDRESS = 'Demo14.User14@sailpointdemodemoaaaa.com'";
+        //sql = "DELETE FROM UsersCopy as U WHERE U.MAIL_ADDRESS = 'Demo14.User14@sailpointdemodemoaaaa.com'";
 
       }
 
@@ -89,7 +89,7 @@ public class SftpConnectionTest {
   }
 
   private static String sftpHostIPAdress() {
-    return "20.243.255.91";
+    return "20.243.234.118";
   }
 
   private static String joinSqlSample() {
@@ -101,10 +101,9 @@ public class SftpConnectionTest {
     return sql;
   }
 
-  private static void tsvSqlExamples() {
+  private static String tsvSqlExamples() {
     String sql;
-    //        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, ug.GROUP_NAME as groups FROM Users u\n" +
-//                "              LEFT OUTER JOIN UsersGroups ug ON u.MAIL_ADDRESS = ug.MAIL_ADDRESS ORDER BY COLLATE(MAIL_ADDRESS,'GERMAN')";
+
 
     sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, 'BillingSystemUser' as groups FROM Users u ORDER BY MAIL_ADDRESS";
 
@@ -121,6 +120,9 @@ public class SftpConnectionTest {
 //        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, 'BillingSystemUser' as groups FROM Users u ORDER BY MAIL_ADDRESS";
 //        sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, 'BillingSystemUser' as groups FROM Users u WHERE MAIL_ADDRESS = 'Demo12.User12@sailpointdemodemoaaaa.com'";
 
+    sql = "SELECT u.MAIL_ADDRESS as MAIL_ADDRESS, u.ROLE_SPECIALISM as ROLE_SPECIALISM, ug.GROUP_NAME as groups FROM Users u\n" +
+            "              LEFT OUTER JOIN UsersGroups ug ON u.MAIL_ADDRESS = ug.MAIL_ADDRESS ORDER BY COLLATE(MAIL_ADDRESS,'GERMAN')";
+    return sql;
   }
 
   private static boolean isDelete(String sql) {
