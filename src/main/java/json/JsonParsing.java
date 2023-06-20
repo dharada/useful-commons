@@ -41,7 +41,7 @@ public class JsonParsing {
 
 //        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
 //    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSBO.txt");
-    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeModifyUserRule.txt");
+    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableAddEntitlementActiveUserRule.txt");
 
     String fileStringWithLF = Files.readString(file);
     checkIfcontainsIllegalCharacters(fileStringWithLF, file);
@@ -60,6 +60,10 @@ public class JsonParsing {
   private static void checkIfcontainsIllegalCharacters(String fileStringWithLF, Path file) throws IOException {
     if (fileStringWithLF.contains("<") || fileStringWithLF.contains(">")) {
       throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")");
+    }
+
+    if (fileStringWithLF.contains("static")) {
+      throw new RuntimeException("static is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")");
     }
   }
 }
