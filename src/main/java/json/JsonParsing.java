@@ -28,13 +28,10 @@ public class JsonParsing {
 
   public static void main(String[] args) throws IOException {
 
-
-    String str = "ハロー, World!";
-    String prefix = "ハ";
-
-    boolean startsWith = startsWithIgnoreCase(str, prefix);
-    System.out.println(startsWith); // Output: true
-
+//    String str = "ハロー, World!";
+//    String prefix = "ハ";
+//    boolean startsWith = startsWithIgnoreCase(str, prefix);
+//    System.out.println(startsWith); // Output: true
 
     new JsonParsing().parse("");
 
@@ -43,14 +40,12 @@ public class JsonParsing {
   public void parse(String text) throws IOException {
 
 //        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
-
-//        Path file = Paths.get("/Users/daisuke.harada/desk/untitled");
-    //Path file = Paths.get("/home/daisuke/desk/beforeProvisioning.txt");
-    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/TestProvisioning.txt");
+//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSBO.txt");
+    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeModifyUserRule.txt");
 
     String fileStringWithLF = Files.readString(file);
+    checkIfcontainsIllegalCharacters(fileStringWithLF, file);
     String fileStrWithCRLF = fileStringWithLF.replaceAll("\n", "\r\n");
-
 
     System.out.println(JSONObject.toString("script", fileStrWithCRLF));
 
@@ -62,4 +57,9 @@ public class JsonParsing {
 //        System.out.println(text);
   }
 
+  private static void checkIfcontainsIllegalCharacters(String fileStringWithLF, Path file) throws IOException {
+    if (fileStringWithLF.contains("<") || fileStringWithLF.contains(">")) {
+      throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")");
+    }
+  }
 }
