@@ -39,14 +39,8 @@ public class JsonParsing {
 
   public void parse(String text) throws IOException {
 
-//        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
-//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSBO.txt");
-
-//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableAddEntitlementActiveUserRule.txt");
-
-    //    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserDisableDeleteEntitlementActiveUserRule.txt");
-
     Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeSuspendedRule.txt");
+//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserDisableDeleteEntitlementActiveUserRule.txt");
 
 
     String fileStringWithLF = Files.readString(file);
@@ -55,12 +49,6 @@ public class JsonParsing {
 
     System.out.println(JSONObject.toString("script", fileStrWithCRLF));
 
-//        JSONObject jsonObject = new JSONObject();
-//        String text = "Text with special character /\"\'\b\f\t\r\n.";
-//        System.out.println(text);
-//        System.out.println("After escaping.");
-//        text = jsonObject.escape(text);
-//        System.out.println(text);
   }
 
   private static void checkIfcontainsIllegalCharacters(String fileStringWithLF, Path file) throws IOException {
