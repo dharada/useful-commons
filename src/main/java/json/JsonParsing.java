@@ -41,7 +41,13 @@ public class JsonParsing {
 
 //        String s = "\"foo\" is not \"bar\". specials: \b\r\n\f\t\\/";
 //    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSBO.txt");
-    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableAddEntitlementActiveUserRule.txt");
+
+//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableAddEntitlementActiveUserRule.txt");
+
+    //    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserDisableDeleteEntitlementActiveUserRule.txt");
+
+    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeSuspendedRule.txt");
+
 
     String fileStringWithLF = Files.readString(file);
     checkIfcontainsIllegalCharacters(fileStringWithLF, file);
