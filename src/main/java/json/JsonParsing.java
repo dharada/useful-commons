@@ -2,18 +2,10 @@ package json;
 
 //import com.googlecode.json-sample
 
-import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class JsonParsing {
 
@@ -38,26 +30,20 @@ public class JsonParsing {
   }
 
   public void parse(String text) throws IOException {
-
-    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeSuspendedRule.txt");
-//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserDisableDeleteEntitlementActiveUserRule.txt");
-
-
+    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeApproveRule.txt");
     String fileStringWithLF = Files.readString(file);
-    checkIfcontainsIllegalCharacters(fileStringWithLF, file);
+    checkIllegalCharacters(fileStringWithLF, file);
     String fileStrWithCRLF = fileStringWithLF.replaceAll("\n", "\r\n");
-
     System.out.println(JSONObject.toString("script", fileStrWithCRLF));
-
   }
 
-  private static void checkIfcontainsIllegalCharacters(String fileStringWithLF, Path file) throws IOException {
-    if (fileStringWithLF.contains("<") || fileStringWithLF.contains(">")) {
-      throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")");
+  private static void checkIllegalCharacters(String fileStringWithLF, Path file) throws IOException {
+    if (fileStringWithLF.contains("static")) {
+      throw new RuntimeException("static is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + fileStringWithLF);
     }
 
-    if (fileStringWithLF.contains("static")) {
-      throw new RuntimeException("static is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")");
+    if (fileStringWithLF.contains("<A") || fileStringWithLF.contains("<S") || fileStringWithLF.contains("<M") || fileStringWithLF.contains("<I") || fileStringWithLF.contains(">")) {
+      throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + fileStringWithLF);
     }
   }
 }
