@@ -1,14 +1,14 @@
 package json;
 
-//import com.googlecode.json-sample
-
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
-public class JsonParsing {
+public class JsonParsingForCloudRule {
 
   public static boolean startsWithIgnoreCase(String str, String prefix) {
     if (str.length() < prefix.length()) {
@@ -20,28 +20,17 @@ public class JsonParsing {
   }
 
   public static void main(String[] args) throws IOException {
-
-//    String str = "ハロー, World!";
-//    String prefix = "ハ";
-//    boolean startsWith = startsWithIgnoreCase(str, prefix);
-//    System.out.println(startsWith); // Output: true
-
-    new JsonParsing().parse("");
+    new JsonParsingForCloudRule().parse("");
   }
 
   public void parse(String text) throws IOException {
-//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeApproveRule.txt");
-    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSBO.txt");
-
-    //  Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/SQLLoader-Provision-Rule-sample.txt");
+    Path file = Paths.get("/Users/daisuke.harada/github/daisuke-harada-sp/identitynow-services-config/Fujitsu/oneid-dev-sb1.identitynow.com/rules/Rule - BeforeProvisioning - Delete DetailArrangementSystem account.xml");
 
     List<String> fileStringWithLF = Files.readAllLines(file);
     for (int i = 0; i < fileStringWithLF.size(); i++) {
       checkIllegalCharacters(eachLine(fileStringWithLF, i), file);
     }
 
-    String fileStrWithCRLF = Files.readString(file).replaceAll("\n", "\r\n");
-    System.out.println(JSONObject.toString("script", fileStrWithCRLF));
   }
 
   private String eachLine(List<String> fileStringWithLF, int i) {
@@ -52,6 +41,17 @@ public class JsonParsing {
     if (eachLine.contains("static")) {
       throw new RuntimeException("static is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
     }
+
+    if (eachLine.trim().startsWith("<?xml")) {
+      //
+      return;
+    }
+
+    if (eachLine.trim().startsWith("<?xml") || eachLine.trim().startsWith("<Rule") || eachLine.trim().startsWith("<Description>") || eachLine.trim().startsWith("<Source>") || eachLine.trim().startsWith("<!DOCTYPE") || eachLine.trim().startsWith("]]></Source") || eachLine.trim().startsWith("</Rule>")) {
+      //
+      return;
+    }
+
 
     if (eachLine.contains("<A") || eachLine.contains("<S") || eachLine.contains("<M") || eachLine.contains("<I") || (eachLine.contains(">") && !eachLine.contains(" > 0"))) {
       throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
