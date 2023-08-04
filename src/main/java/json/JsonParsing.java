@@ -31,7 +31,8 @@ public class JsonParsing {
 
   public void parse(String text) throws IOException {
 //    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeApproveRule.txt");
-    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSBO.txt");
+    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/Billing JDBC Rule Adapter.txt");
+    //Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/DetailArrange JDBC Rule Adapter.txt");
 
     //  Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/SQLLoader-Provision-Rule-sample.txt");
 
