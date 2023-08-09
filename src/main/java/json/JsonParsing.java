@@ -43,13 +43,15 @@ public class JsonParsing {
 
       while (fileIterator.hasNext()) {
         Path path = Paths.get(fileIterator.next().getAbsolutePath());
-
         Iterator<String> lineIte = Files.readAllLines(path).iterator();
         while (lineIte.hasNext()) {
           checkIllegalCharacters(lineIte.next(), path);
         }
 
-        System.out.println(path.toAbsolutePath() + " :check DONE.OK");
+        if (false) {
+          System.out.println(path.toAbsolutePath() + " :check DONE.OK");
+        }
+
       }
     }
 
