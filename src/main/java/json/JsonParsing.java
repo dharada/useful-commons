@@ -4,9 +4,15 @@ package json;
 
 import org.json.simple.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class JsonParsing {
 
@@ -20,27 +26,39 @@ public class JsonParsing {
   }
 
   public static void main(String[] args) throws IOException {
-
-//    String str = "ハロー, World!";
-//    String prefix = "ハ";
-//    boolean startsWith = startsWithIgnoreCase(str, prefix);
-//    System.out.println(startsWith); // Output: true
-
     new JsonParsing().parse("");
   }
 
   public void parse(String text) throws IOException {
-//    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeApproveRule.txt");
-    Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/Billing JDBC Rule Adapter.txt");
-    //Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/DetailArrange JDBC Rule Adapter.txt");
 
-    //  Path file = Paths.get("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/SQLLoader-Provision-Rule-sample.txt");
+    File file1 = new File("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule");
+    if (file1.isDirectory()) {
+      Predicate<File> predicate = new Predicate<File>() {
+        @Override
+        public boolean test(File o) {
+          return o.toString().endsWith(".txt");
+        }
+      };
+      Iterator<File> fileIterator = Arrays.stream(file1.listFiles()).filter(predicate).iterator();
 
+      while (fileIterator.hasNext()) {
+        Path path = Paths.get(fileIterator.next().getAbsolutePath());
+
+        Iterator<String> lineIte = Files.readAllLines(path).iterator();
+        while (lineIte.hasNext()) {
+          checkIllegalCharacters(lineIte.next(), path);
+        }
+
+        System.out.println(path.toAbsolutePath() + " :check DONE.OK");
+      }
+    }
+
+    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSAO-AfterGetUser.txt";
+    Path file = Paths.get(filePath);
     List<String> fileStringWithLF = Files.readAllLines(file);
     for (int i = 0; i < fileStringWithLF.size(); i++) {
       checkIllegalCharacters(eachLine(fileStringWithLF, i), file);
     }
-
     String fileStrWithCRLF = Files.readString(file).replaceAll("\n", "\r\n");
     System.out.println(JSONObject.toString("script", fileStrWithCRLF));
   }
