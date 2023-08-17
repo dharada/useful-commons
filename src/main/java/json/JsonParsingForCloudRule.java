@@ -1,11 +1,15 @@
 package json;
 
+import org.checkerframework.checker.units.qual.A;
 import org.json.simple.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class JsonParsingForCloudRule {
@@ -20,16 +24,27 @@ public class JsonParsingForCloudRule {
   }
 
   public static void main(String[] args) throws IOException {
-    new JsonParsingForCloudRule().parse("");
+    new JsonParsingForCloudRule().parse();
   }
 
-  public void parse(String text) throws IOException {
-    Path file = Paths.get("/Users/daisuke.harada/github/daisuke-harada-sp/identitynow-services-config/Fujitsu/oneid-dev-sb1.identitynow.com/rules/Rule - BeforeProvisioning - Delete DetailArrangementSystem account.xml");
+  public void parse() throws IOException {
 
-    List<String> fileStringWithLF = Files.readAllLines(file);
-    for (int i = 0; i < fileStringWithLF.size(); i++) {
-      checkIllegalCharacters(eachLine(fileStringWithLF, i), file);
+    Path file1 = Paths.get("/Users/daisuke.harada/github/daisuke-harada-sp/identitynow-services-config/Fujitsu/oneid-dev-sb1.identitynow.com/rules/Rule - BeforeProvisioning - Delete BillingIntegrationSystem account.xml");
+    Path file2 = Paths.get("/Users/daisuke.harada/github/daisuke-harada-sp/identitynow-services-config/Fujitsu/oneid-dev-sb1.identitynow.com/rules/Rule - BeforeProvisioning - Delete DetailArrangementSystem account.xml");
+
+    List files = new ArrayList();
+    files.add(file1);
+    files.add(file2);
+
+    Iterator<Path> iterator = files.iterator();
+    while (iterator.hasNext()) {
+      Path next = iterator.next();
+      List<String> fileStringWithLF = Files.readAllLines(next);
+      for (int i = 0; i < fileStringWithLF.size(); i++) {
+        checkIllegalCharacters(eachLine(fileStringWithLF, i), next);
+      }
     }
+
 
   }
 

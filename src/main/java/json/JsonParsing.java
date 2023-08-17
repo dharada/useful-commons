@@ -26,10 +26,10 @@ public class JsonParsing {
   }
 
   public static void main(String[] args) throws IOException {
-    new JsonParsing().parse("");
+    new JsonParsing().parse();
   }
 
-  public void parse(String text) throws IOException {
+  public void parse() throws IOException {
 
     File file1 = new File("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule");
     if (file1.isDirectory()) {
@@ -55,7 +55,7 @@ public class JsonParsing {
       }
     }
 
-    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/OpenText-WSAO-AfterGetUser.txt";
+    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/Billing JDBC Rule Adapter.txt";
     Path file = Paths.get(filePath);
     List<String> fileStringWithLF = Files.readAllLines(file);
     for (int i = 0; i < fileStringWithLF.size(); i++) {
