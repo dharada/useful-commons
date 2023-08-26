@@ -55,7 +55,13 @@ public class JsonParsing {
       }
     }
 
-    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/Billing JDBC Rule Adapter.txt";
+//    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeApproveRule.txt";
+//    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeModifyUserRule.txt";
+//    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeSuspendedRule.txt";
+//    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserDisableDeleteEntitlementActiveUserRule.txt";
+    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableAddEntitlementActiveUserRule.txt";
+
+
     Path file = Paths.get(filePath);
     List<String> fileStringWithLF = Files.readAllLines(file);
     for (int i = 0; i < fileStringWithLF.size(); i++) {
