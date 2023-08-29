@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -45,7 +46,9 @@ public class JsonParsing {
         Path path = Paths.get(fileIterator.next().getAbsolutePath());
         Iterator<String> lineIte = Files.readAllLines(path).iterator();
         while (lineIte.hasNext()) {
-          checkIllegalCharacters(lineIte.next(), path);
+
+          lineIte.next();
+          //checkIllegalCharacters(lineIte.next(), path);
         }
 
         if (false) {
@@ -62,15 +65,35 @@ public class JsonParsing {
 //    String filePath = "/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableAddEntitlementActiveUserRule.txt";
 
     Path file = Paths.get(filePath);
+
+    StringBuilder stringBuilder = new StringBuilder();
+
     List<String> fileStringWithLF = Files.readAllLines(file);
     for (int i = 0; i < fileStringWithLF.size(); i++) {
-      checkIllegalCharacters(eachLine(fileStringWithLF, i), file);
+      String eachLine = eachLine(fileStringWithLF, i);
+      eachLine = eachLine.replace("Map<String, Object>", "Map");
+      eachLine = eachLine.replace("List<AttributeRequest>", "List");
+      eachLine = eachLine.replace("List<AccountRequest>", "List");
+      eachLine = eachLine.replace("List<Map>", "List");
+
+      checkIllegalCharacters(eachLine, file);
+
+      if (i == fileStringWithLF.size() - 1) {
+        stringBuilder.append(eachLine);
+      } else {
+        stringBuilder.append(eachLine + "\r\n");
+      }
+
     }
 
     System.out.println(file.getFileName().toString() + "\n");
 
-    String fileStrWithCRLF = Files.readString(file).replaceAll("\n", "\r\n");
-    System.out.println(JSONObject.toString("script", fileStrWithCRLF));
+
+    String finalStrWithCRLF = stringBuilder.toString();
+
+    //String finalStrWithCRLF = stringBuilder.toString().replaceAll("\n", "\r\n");
+    //String fileStrWithCRLF = Files.readString(file).replaceAll("\n", "\r\n");
+    System.out.println(JSONObject.toString("script", finalStrWithCRLF));
   }
 
   private String eachLine(List<String> fileStringWithLF, int i) {
