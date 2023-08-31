@@ -10,6 +10,7 @@ import java.nio.file.*;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -31,15 +32,15 @@ public class JsonParsing {
 
   public void parse() throws IOException {
 
-    File file1 = new File("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule");
-    if (file1.isDirectory()) {
+    File connRuleDir = new File("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule");
+    if (connRuleDir.isDirectory()) {
       Predicate<File> predicate = new Predicate<File>() {
         @Override
         public boolean test(File o) {
           return o.toString().endsWith(".txt");
         }
       };
-      Iterator<File> fileIterator = Arrays.stream(file1.listFiles()).filter(predicate).iterator();
+      Iterator<File> fileIterator = Arrays.stream(Objects.requireNonNull(connRuleDir.listFiles())).filter(predicate).iterator();
 
       while (fileIterator.hasNext()) {
         Path path = Paths.get(fileIterator.next().getAbsolutePath());
