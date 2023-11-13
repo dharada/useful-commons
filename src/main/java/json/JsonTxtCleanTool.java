@@ -30,7 +30,7 @@ public class JsonTxtCleanTool {
         Path path = Paths.get(fileIterator.next().getAbsolutePath());
         System.out.println(path.toAbsolutePath());
 
-        if (path.toAbsolutePath().toString().contains("JST")) {
+        if (path.toAbsolutePath().toString().contains("java202")) {
           FileUtils.forceDeleteOnExit(new File(path.toAbsolutePath().toString()));
         }
 

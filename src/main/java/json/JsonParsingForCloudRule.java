@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -65,7 +66,13 @@ public class JsonParsingForCloudRule {
         }
 
         try {
-          String creatingFile = path.toAbsolutePath() + new Date().toString() + ".txt";
+
+          // Define a date and time format pattern
+          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+          // Format the Date object using the specified pattern
+          String formattedDate = dateFormat.format(new Date());
+          String creatingFile = path.toAbsolutePath() + formattedDate + ".txt";
+
           FileWriter writer = new FileWriter(creatingFile);
           writer.write(newfileContents.toString());
           writer.close();
