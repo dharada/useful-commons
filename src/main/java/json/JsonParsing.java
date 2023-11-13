@@ -65,7 +65,7 @@ public class JsonParsing {
     fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableRule.txt");
     fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserDisableRule.txt");
 
-//  fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/JDBC-QuickStart");
+    //fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/AD-connector-rule/AD-BeforeCreateRule.txt");
 
     Iterator<String> iterator = fileList.iterator();
     while (iterator.hasNext()) {
@@ -95,7 +95,10 @@ public class JsonParsing {
       throw new RuntimeException("static is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
     }
 
-    if (eachLine.contains("<A") || eachLine.contains("<S") || eachLine.contains("<M") || eachLine.contains("<I") || (eachLine.contains(">") && !eachLine.contains(" > 0"))) {
+    if (eachLine.contains("<A") ||
+            eachLine.contains("<S") || eachLine.contains("<M") ||
+            eachLine.contains("<I") || (eachLine.contains(">")
+            && !eachLine.contains(" > 0")) && !eachLine.contains("$ErrorItem -> Message")) {
       throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
     }
 
