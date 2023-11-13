@@ -89,26 +89,7 @@ public class JsonParsingForCloudRule {
       }
     }
 
-
-//    Path file1 = Paths.get("/Users/daisuke.harada/github/daisuke-harada-sp/identitynow-services-config/Fujitsu/oneid-dev-sb1.identitynow.com/rules/Rule - BeforeProvisioning - Delete BillingIntegrationSystem account.xml");
-//    Path file2 = Paths.get("/Users/daisuke.harada/github/daisuke-harada-sp/identitynow-services-config/Fujitsu/oneid-dev-sb1.identitynow.com/rules/Rule - BeforeProvisioning - Delete DetailArrangementSystem account.xml");
-//
-//    List files = new ArrayList();
-//    files.add(file1);
-//    files.add(file2);
-//
-//    Iterator<Path> iterator = files.iterator();
-//    while (iterator.hasNext()) {
-//      Path next = iterator.next();
-//      List<String> fileStringWithLF = Files.readAllLines(next);
-//      for (int i = 0; i < fileStringWithLF.size(); i++) {
-//        checkIllegalCharacters(eachLine(fileStringWithLF, i), next);
-//      }
-//    }
-
-
   }
-
 
   private String eachLine(List<String> fileStringWithLF, int i) {
     return fileStringWithLF.get(i);
@@ -132,7 +113,6 @@ public class JsonParsingForCloudRule {
       }
     }
 
-
     if (eachLine.contains("static") && !isIgnore) {
       throw new RuntimeException("static is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
     }
@@ -146,7 +126,6 @@ public class JsonParsingForCloudRule {
       //
       return;
     }
-
 
     if (eachLine.contains("<A") || eachLine.contains("<S") || eachLine.contains("<M") || eachLine.contains("<I") || (eachLine.contains(">") && !eachLine.contains(" > 0"))) {
       throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
