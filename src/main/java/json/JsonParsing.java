@@ -79,7 +79,13 @@ public class JsonParsing {
 
       System.out.println(file.getFileName().toString() + "\n");
 
-      String fileStrWithCRLF = Files.readString(file).replaceAll("\n", "\r\n");
+      String fileString = Files.readString(file);
+      fileString = fileString.replace("Map<String, Object>", "Map");
+      fileString = fileString.replace("List<AttributeRequest>", "List");
+      fileString = fileString.replace("List<AccountRequest>", "List");
+      fileString = fileString.replace("List<Map>", "List");
+
+      String fileStrWithCRLF = fileString.replaceAll("\n", "\r\n");
       System.out.println(JSONObject.toString("script", fileStrWithCRLF));
       System.out.println();
     }
@@ -95,11 +101,17 @@ public class JsonParsing {
       throw new RuntimeException("static is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
     }
 
+    eachLine = eachLine.replace("Map<String, Object>", "Map");
+    eachLine = eachLine.replace("List<AttributeRequest>", "List");
+    eachLine = eachLine.replace("List<AccountRequest>", "List");
+    eachLine = eachLine.replace("List<Map>", "List");
+
     if (eachLine.contains("<A") ||
             eachLine.contains("<S") || eachLine.contains("<M") ||
             eachLine.contains("<I") || (eachLine.contains(">")
             && !eachLine.contains(" > 0")) && !eachLine.contains("$ErrorItem -> Message")) {
       throw new RuntimeException("< or > is included in the connector-rule impl.(file path=" + file.toAbsolutePath() + ")" + eachLine);
+
     }
 
   }
