@@ -63,6 +63,8 @@ public class JsonParsing {
     fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserDisableRule.txt");
     fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableAddEntitlementActiveUserRule.txt");
     fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/BlackLine-BeforeUserEnableRule.txt");
+    fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/connector-rule/SC_OneID_TestOnly JDBC Rule Adapter.txt");
+
 
     //fileList.add("/Users/daisuke.harada/github/dharada/jdbc-provision-quickstart/AD-connector-rule/AD-BeforeCreateRule.txt");
 
